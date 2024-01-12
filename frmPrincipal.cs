@@ -24,5 +24,11 @@ namespace Sistema_de_Vendas
             frmcadUsuarios frmusuarios = new frmcadUsuarios();
             frmusuarios.ShowDialog();
         }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLogin frmLogin = new frmLogin();
+            frmLogin.ShowDialog();
+        }
     }
 }

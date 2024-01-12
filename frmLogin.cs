@@ -24,7 +24,7 @@ namespace Sistema_de_Vendas
         private void btnEntrar_Click(object sender, EventArgs e)
         {
 
-
+            //testa os campos se estão vazios
             if (txtUsuario.Text.ToString().Trim() == "")
             {
                 MessageBox.Show("Digite um Usuário Válido!");
@@ -41,6 +41,7 @@ namespace Sistema_de_Vendas
             }
             try
             {
+                //conecta ao banco de dados e verifica se corresponde os dados inseridos
                 con.AbrirConexao();
                 MySqlCommand cmdVerificar;
                 MySqlDataReader reader;
@@ -60,6 +61,11 @@ namespace Sistema_de_Vendas
                 else
                 {
                     MessageBox.Show("Usuário ou senha incorreto!");
+                    txtUsuario.Clear();
+                    txtSenha.Clear();
+                    txtUsuario.Focus();
+                    
+
                 }
             }
             catch (Exception ex)
@@ -69,6 +75,10 @@ namespace Sistema_de_Vendas
             }
         }
 
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 
 }
