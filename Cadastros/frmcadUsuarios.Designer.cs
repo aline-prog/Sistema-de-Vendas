@@ -80,7 +80,7 @@
             // 
             this.txtSenha.Enabled = false;
             this.txtSenha.Location = new System.Drawing.Point(81, 54);
-            this.txtSenha.MaxLength = 20;
+            this.txtSenha.MaxLength = 100;
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(100, 20);

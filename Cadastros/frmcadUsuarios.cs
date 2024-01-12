@@ -50,38 +50,60 @@ namespace Sistema_de_Vendas.Cadastros
                 txtSenha.Clear();
                 txtSenha.Focus();
                 return;
-                
+
             }
             else
             {
                 try
                 {
                     con.AbrirConexao();
-                    //inserir dados na tabela
-                    sql = "INSERT INTO cad_usuarios(nome_usuarios, senha_Usuarios, permissoes_Usuarios) VALUES (@nome_usuarios, @senha_Usuarios, @permissoes_Usuarios)";
-                    cmd = new MySqlCommand(sql, con.con);
-                    cmd.Parameters.AddWithValue("@nome_usuarios", txtNome.Text);
-                    cmd.Parameters.AddWithValue("@senha_Usuarios", txtSenha.Text);
-                    cmd.Parameters.AddWithValue("@permissoes_Usuarios", cbPermissoes.Text);
-                    cmd.ExecuteNonQuery();
-                    con.FecharConexao();
-                    //desabilitar botões e campos
-                    txtNome.Enabled = false;
-                    txtNome.Clear();
-                    txtSenha.Enabled = false;
-                    txtSenha.Clear();
-                    cbPermissoes.Enabled = false;
-                    btnAdicionar.Enabled = false;
-                    btnCancelar.Enabled = false;
-                    btnNovo.Enabled = true;
-                    MessageBox.Show("Usuário cadastado com sucesso!");
-                }
-                catch (Exception ex )
+                    MySqlCommand cmdVerificar;
+                    MySqlDataReader reader;
+                    cmdVerificar = new MySqlCommand("SELECT * FROM cad_usuarios WHERE nome_usuarios = @usuario", con.con);
+                    MySqlDataAdapter da = new MySqlDataAdapter();
+                    da.SelectCommand = cmdVerificar;
+                    cmdVerificar.Parameters.AddWithValue("@usuario", txtNome.Text);
+                    reader = cmdVerificar.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        MessageBox.Show("Usuário já cadastrado!");
+                        txtNome.Clear();
+                        txtSenha.Clear();
+                        txtNome.Focus();
+                        con.FecharConexao();
+                        return;
+                    }
+                    else
+                    {
+
+                        //inserir dados na tabela
+                        con.AbrirConexao();
+                        sql = "INSERT INTO cad_usuarios(nome_usuarios, senha_Usuarios, permissoes_Usuarios) VALUES (@nome_usuarios, @senha_Usuarios, @permissoes_Usuarios)";
+                        cmd = new MySqlCommand(sql, con.con);
+                        cmd.Parameters.AddWithValue("@nome_usuarios", txtNome.Text);
+                        cmd.Parameters.AddWithValue("@senha_Usuarios", txtSenha.Text);
+                        cmd.Parameters.AddWithValue("@permissoes_Usuarios", cbPermissoes.Text);
+                        cmd.ExecuteNonQuery();
+                        con.FecharConexao();
+                        //desabilitar botões e campos
+                        txtNome.Enabled = false;
+                        txtNome.Clear();
+                        txtSenha.Enabled = false;
+                        txtSenha.Clear();
+                        cbPermissoes.Enabled = false;
+                        btnAdicionar.Enabled = false;
+                        btnCancelar.Enabled = false;
+                        btnNovo.Enabled = true;
+                        MessageBox.Show("Usuário cadastado com sucesso!");
+                        return;
+                    }                    
+                    }
+                catch (Exception ex)
                 {
 
                     MessageBox.Show("Erro ao cadastrar!" + ex);
                 }
-                
+            
             }
 
         }
