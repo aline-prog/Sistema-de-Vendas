@@ -228,6 +228,7 @@
             this.btnfoto.TabIndex = 13;
             this.btnfoto.Text = "foto";
             this.btnfoto.UseVisualStyleBackColor = true;
+            this.btnfoto.Click += new System.EventHandler(this.btnfoto_Click);
             // 
             // lblbairro
             // 

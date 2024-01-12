@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,12 +18,33 @@ namespace Sistema_de_Vendas
         conn con = new conn();
         string sql;
         MySqlCommand cmd;
+        string foto;
+
+
         public frmcadClientes()
         {
             InitializeComponent();
         }
+        private byte[] img()
+        {
+            byte[] image_byte = null;
+            if (foto == "")
+            {
+                return null;
+            }
+            FileStream fs = new FileStream(foto, FileMode.Open, FileAccess.Read);
+            BinaryReader br = new BinaryReader(fs);
+            image_byte = br.ReadBytes((int)fs.Length);
+            return image_byte;
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        }
+        private void Limparfoto()
+        {
+            pbFoto.Image = Properties.Resources.download;
+            foto = "Resourses/download.png";
+        }
+
+    private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -42,6 +65,7 @@ namespace Sistema_de_Vendas
             btnExcluir.Enabled = true;
             btnCancelar.Enabled = true;
             btnfoto.Enabled = true;
+            txtnome.Focus();
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)
@@ -83,7 +107,7 @@ namespace Sistema_de_Vendas
                         txtnumero.Clear();
                         txttelefone.Clear();
                         txtcelular.Clear();
-                        
+
                         txtnome.Focus();
                         con.FecharConexao();
                         return;
@@ -93,7 +117,7 @@ namespace Sistema_de_Vendas
 
                         //insere dados na tabela
                         con.AbrirConexao();
-                        sql = "INSERT INTO cad_clientes(nome_clientes, documento_clientes, endereco_clientes, bairro_clientes, numero_clientes, telefone_clientes, celular_clientes) VALUES (@nome_clientes, @documento_clientes, @endereco_clientes, @bairro_clientes, @numero_clientes, @telefone_clientes, @celular_clientes)";
+                        sql = "INSERT INTO cad_clientes(nome_clientes, documento_clientes, endereco_clientes, bairro_clientes, numero_clientes, telefone_clientes, celular_clientes, foto_clientes) VALUES (@nome_clientes, @documento_clientes, @endereco_clientes, @bairro_clientes, @numero_clientes, @telefone_clientes, @celular_clientes, @foto)";
                         cmd = new MySqlCommand(sql, con.con);
                         cmd.Parameters.AddWithValue("@nome_clientes", txtnome.Text);
                         cmd.Parameters.AddWithValue("@documento_clientes", txtdocumento.Text);
@@ -102,7 +126,8 @@ namespace Sistema_de_Vendas
                         cmd.Parameters.AddWithValue("@numero_clientes", txtnumero.Text);
                         cmd.Parameters.AddWithValue("@telefone_clientes", txttelefone.Text);
                         cmd.Parameters.AddWithValue("@celular_clientes", txtcelular.Text);
-                        //cmd.Parameters.AddWithValue("@foto_clientes", img);
+                        cmd.Parameters.AddWithValue("@foto", img());
+
                         cmd.ExecuteNonQuery();
                         con.FecharConexao();
                         //desabilitar botões e campos
@@ -111,23 +136,24 @@ namespace Sistema_de_Vendas
                         txtdocumento.Enabled = false;
                         txtdocumento.Clear();
                         txtendereco.Enabled = false;
-                        txtendereco.Clear() ;
+                        txtendereco.Clear();
                         txtbairro.Enabled = false;
-                        txtbairro.Clear() ;
+                        txtbairro.Clear();
                         txtnumero.Enabled = false;
                         txtnumero.Clear();
                         txttelefone.Enabled = false;
-                        txttelefone.Clear() ;
+                        txttelefone.Clear();
                         txtcelular.Enabled = false;
-                        txtcelular.Clear() ;
+                        txtcelular.Clear();
                         btnAdicionar.Enabled = false;
                         btnAlterar.Enabled = false;
                         btnExcluir.Enabled = false;
                         btnCancelar.Enabled = false;
                         btnfoto.Enabled = false;
                         btnNovo.Enabled = true;
+                        Limparfoto();
                         btnNovo.Focus();
-                       
+
                         MessageBox.Show("Cliente cadastado com sucesso!");
                         return;
                     }
@@ -141,5 +167,20 @@ namespace Sistema_de_Vendas
             }
 
         }
+
+        private void btnfoto_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Imagens(*.jpg; *.png) | *.jpg; *.png";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                foto = dialog.FileName.ToString();
+                pbFoto.ImageLocation = foto;
+       
+            }
+        }
+
+        
     }
+    
 }
