@@ -46,6 +46,10 @@
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnfoto = new System.Windows.Forms.Button();
+            this.lblbairro = new System.Windows.Forms.Label();
+            this.lblnumero = new System.Windows.Forms.Label();
+            this.txtbairro = new System.Windows.Forms.TextBox();
+            this.txtnumero = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgCliente)).BeginInit();
             this.SuspendLayout();
@@ -98,6 +102,7 @@
             // txtnome
             // 
             this.txtnome.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtnome.Enabled = false;
             this.txtnome.Location = new System.Drawing.Point(124, 6);
             this.txtnome.MaxLength = 100;
             this.txtnome.Name = "txtnome";
@@ -107,6 +112,7 @@
             // txtendereco
             // 
             this.txtendereco.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtendereco.Enabled = false;
             this.txtendereco.Location = new System.Drawing.Point(124, 34);
             this.txtendereco.MaxLength = 100;
             this.txtendereco.Name = "txtendereco";
@@ -116,15 +122,17 @@
             // txttelefone
             // 
             this.txttelefone.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txttelefone.Enabled = false;
             this.txttelefone.Location = new System.Drawing.Point(124, 60);
             this.txttelefone.MaxLength = 100;
             this.txttelefone.Name = "txttelefone";
             this.txttelefone.Size = new System.Drawing.Size(95, 20);
-            this.txttelefone.TabIndex = 4;
+            this.txttelefone.TabIndex = 6;
             // 
             // txtdocumento
             // 
             this.txtdocumento.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtdocumento.Enabled = false;
             this.txtdocumento.Location = new System.Drawing.Point(383, 6);
             this.txtdocumento.MaxLength = 100;
             this.txtdocumento.Name = "txtdocumento";
@@ -134,11 +142,12 @@
             // txtcelular
             // 
             this.txtcelular.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtcelular.Enabled = false;
             this.txtcelular.Location = new System.Drawing.Point(383, 60);
             this.txtcelular.MaxLength = 100;
             this.txtcelular.Name = "txtcelular";
             this.txtcelular.Size = new System.Drawing.Size(95, 20);
-            this.txtcelular.TabIndex = 5;
+            this.txtcelular.TabIndex = 7;
             // 
             // pbFoto
             // 
@@ -156,7 +165,7 @@
             this.dgCliente.Location = new System.Drawing.Point(12, 101);
             this.dgCliente.Name = "dgCliente";
             this.dgCliente.Size = new System.Drawing.Size(763, 150);
-            this.dgCliente.TabIndex = 7;
+            this.dgCliente.TabIndex = 14;
             // 
             // btnNovo
             // 
@@ -166,18 +175,22 @@
             this.btnNovo.TabIndex = 8;
             this.btnNovo.Text = "Novo";
             this.btnNovo.UseVisualStyleBackColor = true;
+            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
             // btnAdicionar
             // 
+            this.btnAdicionar.Enabled = false;
             this.btnAdicionar.Location = new System.Drawing.Point(111, 257);
             this.btnAdicionar.Name = "btnAdicionar";
             this.btnAdicionar.Size = new System.Drawing.Size(75, 23);
             this.btnAdicionar.TabIndex = 9;
             this.btnAdicionar.Text = "Adicionar";
             this.btnAdicionar.UseVisualStyleBackColor = true;
+            this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
             // 
             // btnAlterar
             // 
+            this.btnAlterar.Enabled = false;
             this.btnAlterar.Location = new System.Drawing.Point(209, 257);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(75, 23);
@@ -187,6 +200,7 @@
             // 
             // btnExcluir
             // 
+            this.btnExcluir.Enabled = false;
             this.btnExcluir.Location = new System.Drawing.Point(302, 257);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(75, 23);
@@ -196,15 +210,18 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.Enabled = false;
             this.btnCancelar.Location = new System.Drawing.Point(392, 257);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 12;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnfoto
             // 
+            this.btnfoto.Enabled = false;
             this.btnfoto.Location = new System.Drawing.Point(594, 37);
             this.btnfoto.Name = "btnfoto";
             this.btnfoto.Size = new System.Drawing.Size(75, 23);
@@ -212,11 +229,52 @@
             this.btnfoto.Text = "foto";
             this.btnfoto.UseVisualStyleBackColor = true;
             // 
+            // lblbairro
+            // 
+            this.lblbairro.AutoSize = true;
+            this.lblbairro.Location = new System.Drawing.Point(325, 37);
+            this.lblbairro.Name = "lblbairro";
+            this.lblbairro.Size = new System.Drawing.Size(37, 13);
+            this.lblbairro.TabIndex = 34;
+            this.lblbairro.Text = "Bairro:";
+            // 
+            // lblnumero
+            // 
+            this.lblnumero.AutoSize = true;
+            this.lblnumero.Location = new System.Drawing.Point(489, 37);
+            this.lblnumero.Name = "lblnumero";
+            this.lblnumero.Size = new System.Drawing.Size(47, 13);
+            this.lblnumero.TabIndex = 15;
+            this.lblnumero.Text = "Número:";
+            // 
+            // txtbairro
+            // 
+            this.txtbairro.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtbairro.Enabled = false;
+            this.txtbairro.Location = new System.Drawing.Point(383, 34);
+            this.txtbairro.MaxLength = 50;
+            this.txtbairro.Name = "txtbairro";
+            this.txtbairro.Size = new System.Drawing.Size(100, 20);
+            this.txtbairro.TabIndex = 4;
+            // 
+            // txtnumero
+            // 
+            this.txtnumero.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtnumero.Enabled = false;
+            this.txtnumero.Location = new System.Drawing.Point(534, 34);
+            this.txtnumero.Name = "txtnumero";
+            this.txtnumero.Size = new System.Drawing.Size(44, 20);
+            this.txtnumero.TabIndex = 5;
+            // 
             // frmcadClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(795, 294);
+            this.Controls.Add(this.txtnumero);
+            this.Controls.Add(this.txtbairro);
+            this.Controls.Add(this.lblnumero);
+            this.Controls.Add(this.lblbairro);
             this.Controls.Add(this.btnfoto);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnExcluir);
@@ -268,5 +326,9 @@
         private System.Windows.Forms.Button btnExcluir;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnfoto;
+        private System.Windows.Forms.Label lblbairro;
+        private System.Windows.Forms.Label lblnumero;
+        private System.Windows.Forms.TextBox txtbairro;
+        private System.Windows.Forms.TextBox txtnumero;
     }
 }
