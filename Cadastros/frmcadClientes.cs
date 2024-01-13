@@ -40,8 +40,8 @@ namespace Sistema_de_Vendas
         }
         private void Limparfoto()
         {
-            pbFoto.Image = Properties.Resources.download;
-            foto = "Resourses/download.png";
+            pbFoto.Image = Properties.Resources.download; 
+            foto = "download.png";
         }
 
     private void btnCancelar_Click(object sender, EventArgs e)
@@ -176,11 +176,62 @@ namespace Sistema_de_Vendas
             {
                 foto = dialog.FileName.ToString();
                 pbFoto.ImageLocation = foto;
-       
+
             }
         }
 
-        
+        private void frmcadClientes_Load(object sender, EventArgs e)
+        {
+            Limparfoto();
+        }
+
+        private void txtdocumento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funcoes.DecNumber(sender, e);
+        }
+
+        private void txtnumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funcoes.DecNumber(sender, e);
+        }
+
+        private void txttelefone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funcoes.DecNumber(sender, e);
+        }
+
+        private void txtcelular_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funcoes.DecNumber(sender, e);
+        }
+
+        private void txtdocumento_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                string documento = txtdocumento.Text;
+
+
+                if (documento.Length > 11 )
+                {
+                    txtdocumento.Text = Convert.ToInt64(documento).ToString(@"00\.000\.000/0000-00");
+                    //funcoes.validarcnpj(documento.Replace(".", "").Replace("/", "").Replace("-", ""));
+                }
+                else
+                {
+                    txtdocumento.Text = Convert.ToInt64(documento).ToString(@"000\.000\.000-00");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("erro na formatação" + ex);
+                txtdocumento.Clear();
+                txtdocumento.Focus();
+
+
+            }                      
+            
+        }
     }
     
 }

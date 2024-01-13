@@ -38,7 +38,6 @@
             this.txttelefone = new System.Windows.Forms.TextBox();
             this.txtdocumento = new System.Windows.Forms.TextBox();
             this.txtcelular = new System.Windows.Forms.TextBox();
-            this.pbFoto = new System.Windows.Forms.PictureBox();
             this.dgCliente = new System.Windows.Forms.DataGridView();
             this.btnNovo = new System.Windows.Forms.Button();
             this.btnAdicionar = new System.Windows.Forms.Button();
@@ -50,8 +49,9 @@
             this.lblnumero = new System.Windows.Forms.Label();
             this.txtbairro = new System.Windows.Forms.TextBox();
             this.txtnumero = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).BeginInit();
+            this.pbFoto = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgCliente)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).BeginInit();
             this.SuspendLayout();
             // 
             // lblnome
@@ -128,16 +128,19 @@
             this.txttelefone.Name = "txttelefone";
             this.txttelefone.Size = new System.Drawing.Size(95, 20);
             this.txttelefone.TabIndex = 6;
+            this.txttelefone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txttelefone_KeyPress);
             // 
             // txtdocumento
             // 
             this.txtdocumento.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtdocumento.Enabled = false;
             this.txtdocumento.Location = new System.Drawing.Point(383, 6);
-            this.txtdocumento.MaxLength = 100;
+            this.txtdocumento.MaxLength = 18;
             this.txtdocumento.Name = "txtdocumento";
             this.txtdocumento.Size = new System.Drawing.Size(195, 20);
             this.txtdocumento.TabIndex = 2;
+            this.txtdocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtdocumento_KeyPress);
+            this.txtdocumento.Leave += new System.EventHandler(this.txtdocumento_Leave);
             // 
             // txtcelular
             // 
@@ -148,16 +151,7 @@
             this.txtcelular.Name = "txtcelular";
             this.txtcelular.Size = new System.Drawing.Size(95, 20);
             this.txtcelular.TabIndex = 7;
-            // 
-            // pbFoto
-            // 
-            this.pbFoto.BackgroundImage = global::Sistema_de_Vendas.Properties.Resources.download;
-            this.pbFoto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbFoto.Location = new System.Drawing.Point(675, 6);
-            this.pbFoto.Name = "pbFoto";
-            this.pbFoto.Size = new System.Drawing.Size(100, 82);
-            this.pbFoto.TabIndex = 6;
-            this.pbFoto.TabStop = false;
+            this.txtcelular.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtcelular_KeyPress);
             // 
             // dgCliente
             // 
@@ -266,6 +260,17 @@
             this.txtnumero.Name = "txtnumero";
             this.txtnumero.Size = new System.Drawing.Size(44, 20);
             this.txtnumero.TabIndex = 5;
+            this.txtnumero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtnumero_KeyPress);
+            // 
+            // pbFoto
+            // 
+            this.pbFoto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pbFoto.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pbFoto.Location = new System.Drawing.Point(675, 6);
+            this.pbFoto.Name = "pbFoto";
+            this.pbFoto.Size = new System.Drawing.Size(100, 84);
+            this.pbFoto.TabIndex = 6;
+            this.pbFoto.TabStop = false;
             // 
             // frmcadClientes
             // 
@@ -300,8 +305,9 @@
             this.Name = "frmcadClientes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Clientes";
-            ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).EndInit();
+            this.Load += new System.EventHandler(this.frmcadClientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgCliente)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFoto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
